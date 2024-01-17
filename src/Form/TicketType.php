@@ -9,19 +9,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SorteoType extends AbstractType
+class TicketType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-            ->add('fechaIni')
-            ->add('precio_papeleta')
-            ->add('cantidad_papeletas')
-            ->add('fechaFin')
-            ->add('numPremiado')
-            ->add('tickets', EntityType::class, [
-                'class' => Ticket::class,
+            ->add('number')
+            ->add('sorteo', EntityType::class, [
+                'class' => Sorteo::class,
 'choice_label' => 'id',
 'multiple' => true,
             ])
@@ -31,7 +26,7 @@ class SorteoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Sorteo::class,
+            'data_class' => Ticket::class,
         ]);
     }
 }

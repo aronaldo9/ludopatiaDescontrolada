@@ -10,9 +10,11 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Fecha</th>
+                <th>FechaIni</th>
                 <th>Precio_papeleta</th>
                 <th>Cantidad_papeletas</th>
+                <th>FechaFin</th>
+                <th>NumPremiado</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,9 +23,11 @@
             <tr>
                 <td>{{ sorteo.id }}</td>
                 <td>{{ sorteo.nombre }}</td>
-                <td>{{ sorteo.fecha ? sorteo.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sorteo.fechaIni ? sorteo.fechaIni|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sorteo.precioPapeleta }}</td>
                 <td>{{ sorteo.cantidadPapeletas }}</td>
+                <td>{{ sorteo.fechaFin ? sorteo.fechaFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sorteo.numPremiado }}</td>
                 <td>
                     <a href="{{ path('app_sorteo_show', {'id': sorteo.id}) }}">show</a>
                     <a href="{{ path('app_sorteo_edit', {'id': sorteo.id}) }}">edit</a>
@@ -31,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

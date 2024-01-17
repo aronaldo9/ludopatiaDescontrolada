@@ -16,8 +16,8 @@
                 <td>{{ sorteo.nombre }}</td>
             </tr>
             <tr>
-                <th>Fecha</th>
-                <td>{{ sorteo.fecha ? sorteo.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                <th>FechaIni</th>
+                <td>{{ sorteo.fechaIni ? sorteo.fechaIni|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Precio_papeleta</th>
@@ -26,6 +26,14 @@
             <tr>
                 <th>Cantidad_papeletas</th>
                 <td>{{ sorteo.cantidadPapeletas }}</td>
+            </tr>
+            <tr>
+                <th>FechaFin</th>
+                <td>{{ sorteo.fechaFin ? sorteo.fechaFin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NumPremiado</th>
+                <td>{{ sorteo.numPremiado }}</td>
             </tr>
         </tbody>
     </table>
