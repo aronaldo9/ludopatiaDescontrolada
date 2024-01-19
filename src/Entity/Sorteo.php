@@ -28,9 +28,6 @@ class Sorteo
     #[ORM\Column]
     private ?int $cantidad_papeletas = null;
 
-    #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'sorteo')]
-    private Collection $tickets;
-
     #[ORM\OneToMany(mappedBy: 'sorteo', targetEntity: Apuesta::class)]
     private Collection $apuestas;
 
@@ -42,7 +39,6 @@ class Sorteo
 
     public function __construct()
     {
-        $this->tickets = new ArrayCollection();
         $this->apuestas = new ArrayCollection();
     }
 
@@ -95,33 +91,6 @@ class Sorteo
     public function setCantidadPapeletas(int $cantidad_papeletas): static
     {
         $this->cantidad_papeletas = $cantidad_papeletas;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Ticket>
-     */
-    public function getTickets(): Collection
-    {
-        return $this->tickets;
-    }
-
-    public function addTicket(Ticket $ticket): static
-    {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets->add($ticket);
-            $ticket->addSorteo($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTicket(Ticket $ticket): static
-    {
-        if ($this->tickets->removeElement($ticket)) {
-            $ticket->removeSorteo($this);
-        }
 
         return $this;
     }
