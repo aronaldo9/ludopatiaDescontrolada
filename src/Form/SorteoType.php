@@ -17,11 +17,7 @@ class SorteoType extends AbstractType
             ->add('nombre')
             ->add('precio_papeleta')
             ->add('fechaFin')
-            ->add('tickets', EntityType::class, [
-                'class' => Ticket::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
+           
         ;
     }
 

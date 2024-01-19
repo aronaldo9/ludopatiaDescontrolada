@@ -25,7 +25,7 @@ class Sorteo
     #[ORM\Column]
     private ?int $precio_papeleta = null;
 
-    #[ORM\Column]
+    #[ORM\Column (nullable: true)]
     private ?int $cantidad_papeletas = null;
 
     #[ORM\OneToMany(mappedBy: 'sorteo', targetEntity: Apuesta::class)]
