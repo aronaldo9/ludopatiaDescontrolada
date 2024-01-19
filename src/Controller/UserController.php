@@ -57,32 +57,13 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->addSaldoActual($form->get('saldoActual')->getData());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/add', name: 'app_user_add', methods: ['GET', 'POST'])]
-    public function add(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-
-        $form = $this->createForm(UserType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $cantidadAAgregar = $form->get('cantidad_a_anadir')->getData();
-            $user->setSaldoActual($user->setSaldoActual($cantidadAAgregar));
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('user/add.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

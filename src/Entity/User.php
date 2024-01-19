@@ -120,7 +120,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->saldo_actual;
     }
 
-    public function setSaldoActual(int $cantidad): static
+    public function setSaldoActual(int $saldo_actual): static
+    {
+        $this->saldo_actual = $saldo_actual;
+
+        return $this;
+    }
+    public function addSaldoActual(int $cantidad): static
     {
         $this->saldo_actual += $cantidad;
 

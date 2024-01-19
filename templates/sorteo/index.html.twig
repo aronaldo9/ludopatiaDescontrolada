@@ -3,25 +3,25 @@
 {% block title %}Sorteo index{% endblock %}
 
 {% block body %}
-    <h1>Sorteo index</h1>
+    <h1>Sorteos</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+            
                 <th>Nombre</th>
                 <th>FechaIni</th>
                 <th>Precio_papeleta</th>
                 <th>Cantidad_papeletas</th>
                 <th>FechaFin</th>
                 <th>NumPremiado</th>
-                <th>actions</th>
+             
             </tr>
         </thead>
         <tbody>
         {% for sorteo in sorteos %}
             <tr>
-                <td>{{ sorteo.id }}</td>
+               
                 <td>{{ sorteo.nombre }}</td>
                 <td>{{ sorteo.fechaIni ? sorteo.fechaIni|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sorteo.precioPapeleta }}</td>
@@ -29,8 +29,6 @@
                 <td>{{ sorteo.fechaFin ? sorteo.fechaFin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sorteo.numPremiado }}</td>
                 <td>
-                    <a href="{{ path('app_sorteo_show', {'id': sorteo.id}) }}">show</a>
-                    <a href="{{ path('app_sorteo_edit', {'id': sorteo.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -40,6 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_sorteo_new') }}">Create new</a>
+{% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path('app_sorteo_new') }}">Crea un nuevo sorteo</a>
+{% endif %}
 {% endblock %}

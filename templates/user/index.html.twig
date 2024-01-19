@@ -29,6 +29,7 @@
                 <td>
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                  
                 </td>
             </tr>
         {% else %}
@@ -40,4 +41,6 @@
     </table>
 
     <a href="{{ path('app_user_new') }}">Create new</a>
+    <h2>Añadir dinero</h2>
+      <a href="{{ path('app_user_add') }}">add</a>
 {% endblock %}
