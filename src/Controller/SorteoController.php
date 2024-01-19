@@ -26,6 +26,7 @@ class SorteoController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sorteo = new Sorteo();
+        $sorteo->setFechaIni(new \DateTime());
         $form = $this->createForm(SorteoType::class, $sorteo);
         $form->handleRequest($request);
 

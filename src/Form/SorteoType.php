@@ -15,7 +15,6 @@ class SorteoType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('fechaIni')
             ->add('precio_papeleta')
             ->add('fechaFin')
             ->add('tickets', EntityType::class, [
