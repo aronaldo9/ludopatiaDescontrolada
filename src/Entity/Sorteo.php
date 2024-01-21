@@ -148,4 +148,38 @@ class Sorteo
 
         return $this;
     }
+
+    public function generateWinTicket(): int
+        {
+            $apuestas = $this->getApuestas();
+
+            if ($apuestas->isEmpty()) {
+                // Manejo de caso sin apuestas
+                return 0; // O algún valor predeterminado
+            }
+
+            $numerosTickets = [];
+            foreach ($apuestas as $apuesta) {
+                $numerosTickets[] = $apuesta->getTicket()->getNumber();
+            }
+
+            if (empty($numerosTickets)) {
+                // Manejo de caso sin números de tickets
+                return 0; // O algún valor predeterminado
+            }
+
+            // Selecciona un número aleatorio de los números de los tickets
+            $numeroGanador = $numerosTickets[array_rand($numerosTickets)];
+
+            // Asegura que el número esté en un rango específico (ajusta según tus necesidades)
+            $numeroGanador %= 10000;
+
+            // Establece el número premiado en la entidad
+            $this->setNumPremiado($numeroGanador);
+
+            return $numeroGanador;
+        }
+
+    
 }
+
