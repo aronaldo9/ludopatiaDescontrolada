@@ -41,11 +41,34 @@ class ApuestaController extends AbstractController
             'form' => $form,
         ]);
     }
+    
 
     #[Route('/{id}', name: 'app_apuesta_show', methods: ['GET'])]
     public function show(Apuesta $apuestum): Response
     {
         return $this->render('apuesta/show.html.twig', [
+            'apuestum' => $apuestum,
+        ]);
+    }
+
+    #[Route('/{id}/comprar', name: 'app_apuesta_comprar', methods: ['GET'])]
+    public function comprar(Apuesta $apuestum, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            throw new AccessDeniedException('Acceso denegado. Debes estar autenticado para ver esta página.');
+        }
+        // Verificar si la apuesta ya tiene un usuario asignado
+        if (!$apuestum->getUsuario()) {
+            $apuestum->setUsuario($user);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_main', [], Response::HTTP_SEE_OTHER);
+        }else{
+
+        }
+    
+        return $this->render('main/index.html.twig', [
             'apuestum' => $apuestum,
         ]);
     }
@@ -57,7 +80,8 @@ class ApuestaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+           // $apuestum->setUser($this->getUser());
+           // $entityManager->flush();
 
             return $this->redirectToRoute('app_apuesta_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -67,6 +91,7 @@ class ApuestaController extends AbstractController
             'form' => $form,
         ]);
     }
+   
 
     #[Route('/{id}', name: 'app_apuesta_delete', methods: ['POST'])]
     public function delete(Request $request, Apuesta $apuestum, EntityManagerInterface $entityManager): Response

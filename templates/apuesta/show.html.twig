@@ -3,20 +3,21 @@
 {% block title %}Apuesta{% endblock %}
 
 {% block body %}
+
     <h1>Apuesta</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ apuestum.id }}</td>
+                <td>{{ apuestum.ticket.number }}</td>
+                <td>{{ apuestum.sorteo.nombre }}</td>
+                
             </tr>
+           
         </tbody>
     </table>
-
-    <a href="{{ path('app_apuesta_index') }}">back to list</a>
-
-    <a href="{{ path('app_apuesta_edit', {'id': apuestum.id}) }}">edit</a>
-
-    {{ include('apuesta/_delete_form.html.twig') }}
+ {% if not apuestum.usuario %}
+        <a href="{{ path('app_apuesta_comprar', {'id': apuestum.id}) }}">comprar</a>
+    {% endif %}
+  <a href="{{ path('app_main') }}">home</a>
 {% endblock %}

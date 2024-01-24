@@ -8,26 +8,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>actions</th>
+                <th>numero de la papeleta</th>
+                <th>nombre del sorteo</th>
             </tr>
         </thead>
         <tbody>
         {% for apuestum in apuestas %}
             <tr>
-                <td>{{ apuestum.id }}</td>
+                <td>{{ apuestum.ticket.number }}</td>
+                 <td>{{ apuestum.sorteo.nombre }}</td>
                 <td>
-                    <a href="{{ path('app_apuesta_show', {'id': apuestum.id}) }}">show</a>
-                    <a href="{{ path('app_apuesta_edit', {'id': apuestum.id}) }}">edit</a>
+                    <a href="{{ path('app_apuesta_show', {'id': apuestum.id}) }}">acceder a la compra</a>
+                   
                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="2">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+{% if is_granted("ROLE_ADMIN") %}
     <a href="{{ path('app_apuesta_new') }}">Create new</a>
+{% endif %}
 {% endblock %}

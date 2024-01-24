@@ -20,12 +20,22 @@ class ApuestaType extends AbstractType
                 'class' => Ticket::class,
 'choice_label' => 'id',
             ])
-            ->add('user', EntityType::class, [
+/*            ->add('user', EntityType::class, [
                 'class' => User::class,
 'choice_label' => 'id',
-            ])
+            ])*/
             ->add('sorteo', EntityType::class, [
                 'class' => Sorteo::class,
+'choice_label' => 'id',
+            ])
+        ;
+    }
+    public function comprar(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+        
+            ->add('user', EntityType::class, [
+                'class' => User::class,
 'choice_label' => 'id',
             ])
         ;

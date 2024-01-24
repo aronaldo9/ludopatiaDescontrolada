@@ -144,6 +144,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function newGasto(int $newGasto): static
+    {
+        $this->gasto_total -= $newGasto;
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Apuesta>

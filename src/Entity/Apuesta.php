@@ -39,12 +39,12 @@ class Apuesta
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUsuario(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUsuario(?User $user): static
     {
         $this->user = $user;
 
