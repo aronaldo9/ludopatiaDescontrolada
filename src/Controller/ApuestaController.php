@@ -51,22 +51,32 @@ class ApuestaController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/comprar', name: 'app_apuesta_comprar', methods: ['GET'])]
-    public function comprar(Apuesta $apuestum, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/comprar/{precio}', name: 'app_apuesta_comprar', methods: ['GET'])]
+    public function comprar(Apuesta $apuestum, $precio, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         if (!$user) {
             throw new AccessDeniedException('Acceso denegado. Debes estar autenticado para ver esta página.');
         }
         // Verificar si la apuesta ya tiene un usuario asignado
-        if (!$apuestum->getUsuario()) {
-            $apuestum->setUsuario($user);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('app_main', [], Response::HTTP_SEE_OTHER);
-        }else{
+        $compraExitosa = $user->newGasto($precio);
 
+        if (!$compraExitosa) {
+            // La compra no se pudo realizar debido a fondos insuficientes
+            // Puedes manejar esto de alguna manera, como redirigir a una página de error
+            // o mostrar un mensaje al usuario
+            return $this->redirectToRoute('app_user_index');
         }
+            if (!$apuestum->getUsuario()) {
+                $apuestum->setUsuario($user);
+                $entityManager->flush();
+        
+                return $this->redirectToRoute('app_main', [], Response::HTTP_SEE_OTHER);
+            }else{
+    
+            }
+        
+
     
         return $this->render('main/index.html.twig', [
             'apuestum' => $apuestum,

@@ -140,15 +140,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setGastoTotal(int $gasto_total): static
     {
+        
         $this->gasto_total = $gasto_total;
-
+      
         return $this;
     }
-    public function newGasto(int $newGasto): static
+    public function newGasto(int $newGasto): bool
     {
-        $this->gasto_total -= $newGasto;
-
-        return $this;
+        $this->saldo_actual -= $newGasto;
+        $canBuy= true;
+        if($this->saldo_actual<0){
+            $canBuy=false;
+            $this->saldo_actual+=$newGasto;
+        }else{
+            $canBuy=true;
+        }
+        return $canBuy;
     }
 
     /**

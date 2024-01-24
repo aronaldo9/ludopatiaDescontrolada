@@ -11,13 +11,14 @@
             <tr>
                 <td>{{ apuestum.ticket.number }}</td>
                 <td>{{ apuestum.sorteo.nombre }}</td>
-                
+                <td>{{ apuestum.sorteo.getPrecioPapeleta() }}</td>
             </tr>
            
         </tbody>
     </table>
  {% if not apuestum.usuario %}
-        <a href="{{ path('app_apuesta_comprar', {'id': apuestum.id}) }}">comprar</a>
-    {% endif %}
+    <a href="{{ path('app_apuesta_comprar', {'id': apuestum.id, 'precio': apuestum.sorteo.getPrecioPapeleta()}) }}">comprar</a>
+
   <a href="{{ path('app_main') }}">home</a>
+  {% endif %}
 {% endblock %}
