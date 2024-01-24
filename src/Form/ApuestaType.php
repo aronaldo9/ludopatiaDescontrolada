@@ -20,10 +20,7 @@ class ApuestaType extends AbstractType
                 'class' => Ticket::class,
 'choice_label' => 'id',
             ])
-/*            ->add('user', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])*/
+            
             ->add('sorteo', EntityType::class, [
                 'class' => Sorteo::class,
 'choice_label' => 'id',

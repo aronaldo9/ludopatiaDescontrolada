@@ -51,6 +51,21 @@ class SorteoController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/genWinTicket', name: 'app_genWinTicket', methods: ['POST'])]
+    public function generateWinTicket(Sorteo $sorteo, EntityManagerInterface $entityManager): Response
+    {
+        try {
+            $numeroGanador = $sorteo->generateWinTicket();
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Número ganador generado con éxito: ' . $numeroGanador);
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Error al generar el número ganador: ' . $e->getMessage());
+        }
+
+        return $this->redirectToRoute('app_sorteo_show', ['id' => $sorteo->getId()]);
+    }
+
     #[Route('/{id}/edit', name: 'app_sorteo_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sorteo $sorteo, EntityManagerInterface $entityManager): Response
     {

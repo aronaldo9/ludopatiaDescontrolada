@@ -42,5 +42,10 @@
 
     <a href="{{ path('app_sorteo_edit', {'id': sorteo.id}) }}">edit</a>
 
+    <!-- Nuevo botón para generar el número ganador -->
+    <form action="{{ path('app_genWinTicket', {'id': sorteo.id}) }}" method="post">
+        <button type="submit">Generar Número Ganador</button>
+    </form>
+
     {{ include('sorteo/_delete_form.html.twig') }}
 {% endblock %}
